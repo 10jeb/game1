@@ -1,9 +1,122 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Game 1</title>
-  </head>
-  <body>
-    <p>Hello, World!!</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Adventure Game</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    .question, .story, .ending { display: none; }
+    .visible { display: block; }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<h1>Welcome to the Animal Adventure Game!</h1>
+<p>Answer the questions to discover your animal personality and embark on a unique adventure!</p>
+
+<!-- Personality Quiz -->
+<div id="quiz" class="question">
+  <p>What's your ideal environment?</p>
+  <button onclick="addScore('forest')">Forest</button>
+  <button onclick="addScore('ocean')">Ocean</button>
+  <button onclick="addScore('mountain')">Mountain</button>
+
+  <p>How do you respond to challenges?</p>
+  <button onclick="addScore('ocean')">Adapt and flow</button>
+  <button onclick="addScore('forest')">Observe and strategize</button>
+  <button onclick="addScore('mountain')">Face them head-on</button>
+
+  <p>What's your social style?</p>
+  <button onclick="addScore('forest')">Quiet and thoughtful</button>
+  <button onclick="addScore('mountain')">Bold and outspoken</button>
+  <button onclick="addScore('ocean')">Friendly and cooperative</button>
+  
+  <button onclick="determineAnimal()">See my animal!</button>
+</div>
+
+<!-- Animal Stories -->
+<div id="forest" class="story">
+  <h2>You are a Wise Owl!</h2>
+  <p>As an owl, you live in a peaceful forest and watch over your fellow creatures.</p>
+  <button onclick="owlChoice1()">Begin your story</button>
+</div>
+
+<div id="ocean" class="story">
+  <h2>You are a Playful Dolphin!</h2>
+  <p>As a dolphin, you swim through the ocean, exploring coral reefs and making friends.</p>
+  <button onclick="dolphinChoice1()">Begin your story</button>
+</div>
+
+<div id="mountain" class="story">
+  <h2>You are a Brave Mountain Lion!</h2>
+  <p>As a mountain lion, you roam the rugged mountains, fearless and strong.</p>
+  <button onclick="lionChoice1()">Begin your story</button>
+</div>
+
+<!-- Endings -->
+<div id="owlEnding1" class="ending"><h3>Owl Ending 1</h3><p>You peacefully live out your days in the forest, wise and respected.</p></div>
+<div id="owlEnding2" class="ending"><h3>Owl Ending 2</h3><p>You embark on a journey to a new forest, sharing wisdom along the way.</p></div>
+<div id="owlEnding3" class="ending"><h3>Owl Ending 3</h3><p>You bravely defend the forest, ensuring peace for generations.</p></div>
+
+<div id="dolphinEnding1" class="ending"><h3>Dolphin Ending 1</h3><p>You find a hidden underwater paradise and live in harmony with all creatures.</p></div>
+<div id="dolphinEnding2" class="ending"><h3>Dolphin Ending 2</h3><p>You help a friend in need and become a hero among the ocean creatures.</p></div>
+<div id="dolphinEnding3" class="ending"><h3>Dolphin Ending 3</h3><p>You discover a shipwreck filled with treasures, sharing your findings with others.</p></div>
+
+<div id="lionEnding1" class="ending"><h3>Lion Ending 1</h3><p>You conquer the mountains, becoming a legend.</p></div>
+<div id="lionEnding2" class="ending"><h3>Lion Ending 2</h3><p>You find a peaceful valley and live a content life.</p></div>
+<div id="lionEnding3" class="ending"><h3>Lion Ending 3</h3><p>You face your greatest challenge yet and emerge victorious, inspiring all who hear your tale.</p></div>
+
+<script>
+  let scores = { forest: 0, ocean: 0, mountain: 0 };
+
+  function addScore(animal) {
+    scores[animal]++;
+  }
+
+  function determineAnimal() {
+    document.getElementById("quiz").classList.remove("visible");
+
+    const maxScore = Math.max(scores.forest, scores.ocean, scores.mountain);
+    const animal = Object.keys(scores).find(animal => scores[animal] === maxScore);
+    
+    document.getElementById(animal).classList.add("visible");
+  }
+
+  function owlChoice1() {
+    document.getElementById("forest").classList.remove("visible");
+    if (confirm("Will you stay in the forest?")) {
+      document.getElementById("owlEnding1").classList.add("visible");
+    } else if (confirm("Will you go on an adventure to a new forest?")) {
+      document.getElementById("owlEnding2").classList.add("visible");
+    } else {
+      document.getElementById("owlEnding3").classList.add("visible");
+    }
+  }
+
+  function dolphinChoice1() {
+    document.getElementById("ocean").classList.remove("visible");
+    if (confirm("Do you want to explore the coral reef?")) {
+      document.getElementById("dolphinEnding1").classList.add("visible");
+    } else if (confirm("Do you want to help a friend in need?")) {
+      document.getElementById("dolphinEnding2").classList.add("visible");
+    } else {
+      document.getElementById("dolphinEnding3").classList.add("visible");
+    }
+  }
+
+  function lionChoice1() {
+    document.getElementById("mountain").classList.remove("visible");
+    if (confirm("Will you roam the mountain peaks?")) {
+      document.getElementById("lionEnding1").classList.add("visible");
+    } else if (confirm("Will you find a peaceful valley?")) {
+      document.getElementById("lionEnding2").classList.add("visible");
+    } else {
+      document.getElementById("lionEnding3").classList.add("visible");
+    }
+  }
+</script>
+
+</body>
 </html>
